@@ -1,0 +1,44 @@
+The fiber allocation algorithm takes information from three different
+sources: Galaxy DB, Tile DB, Fiber DB.
+
+The following items might be needed from Galaxy DB.
+
+1. Unique Galaxy ID (integer).
+2. RA (float).
+3. Dec (float).
+4. Nominal type (3 character string). Must be one of the following
+three: LRG, ELG, QSO.
+5. Photometric Information (array of floats).
+6. Number of times that this galaxy can be covered by a tile (integer).
+7. n_targeted. (integer) Number of times that this galaxy has been targeted by a fiber (integer).
+8. Fiber ID (array of floats). Array of size n_targeted indicating which
+fiber targeted the galaxy.
+9. Tile ID (array of floats). Array of size n_targeted indicating in
+which tile was targeted the galaxy.
+
+The following items might be needed from Tile DB.
+
+1. Unique Tile ID.
+2. RA (float) tile's central fiber.
+3. Dec (float) tile's central fiber.
+
+The following items might be needed from Fiber DB.
+
+1. Unique fiber ID (integer).
+2. RA (float) Nominal RA if the center of the fiber distribution is
+located over the equator.
+3. Dec (float) Nominal Dec if the center of the fiber distribution is
+located over the equator.
+3. Fiber size (float).
+4. Patrol radius (float).
+
+The following items might be the output after one fiber allocation pass.
+
+1. n_match (integer). Number of galaxies that were targeted after one pass.
+2. FiberID_match (array of floats). Array of FiberIDs of size n_match
+listing the fibers targeting a galaxy.
+3. GalaxyID_match (array of floats). Array of GalaxyIDs of size
+n_match listing the galaxies targeted by a fiber.
+
+
+
