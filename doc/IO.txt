@@ -25,13 +25,13 @@ The following items might be needed from Field DB.
 The following items might be needed from Fiber DB.
 
 1. Unique Fiber ID (integer).
-1. n_fiber (integer) total number of available fibers.
-2. RA (array of float) Nominal RA values if the center of the fiber distribution is
+2. n_fiber (integer) total number of available fibers.
+3. RA (array of float) Nominal RA values if the center of the fiber distribution is
 located over the equator.
-3. Dec (array of float) Nominal Dec values if the center of the fiber distribution is
+4. Dec (array of float) Nominal Dec values if the center of the fiber distribution is
 located over the equator.
-3. Fiber size (float).
-4. Patrol radius (float).
+5. Fiber size (float).
+6. Patrol radius (float).
 
 The following items might be the output after one fiber allocation pass.
 
