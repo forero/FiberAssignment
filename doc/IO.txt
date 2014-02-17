@@ -1,33 +1,34 @@
 The fiber allocation algorithm takes information from three different
-sources: Galaxy DB, Field DB, Fiber DB.
+sources (Data Bases): Galaxy DB, Field DB, Fiber DB.
 
 The following items might be needed from Galaxy DB.
 
 1. Unique Galaxy ID (integer).
 2. RA (float).
 3. Dec (float).
-4. Nominal type (3 character string). Must be one of the following
+4. Nominal type (string). Must be one of the following
 three: LRG, ELG, QSO.
-5. Photometric Information (array of floats).
+5. Photometric Information (array of floats). Depends on the broadband magnitudes available for this object.
 6. Number of fields that include this galaxy (integer).
 7. n_targeted. (integer) Number of times that this galaxy has been targeted by a fiber including all the different fields(integer).
 8. Fiber ID (array of ints). Array of size n_targeted indicating which
-fiber targeted the galaxy.
+fiber has targeted the galaxy.
 9. Field ID (array of floats). Array of size n_targeted indicating in
 which field was targeted the galaxy.
 
 The following items might be needed from Field DB.
 
-1. Unique FieldID.
-2. RA (float) fields's central fiber.
-3. Dec (float) fields's central fiber.
+1. Unique Field ID.
+2. RA (float) fields's RA measured on the central fiber.
+3. Dec (float) fields's Dec measured on the central fiber.
 
 The following items might be needed from Fiber DB.
 
-1. Unique FiberID (integer).
-2. RA (float) Nominal RA if the center of the fiber distribution is
+1. Unique Fiber ID (integer).
+1. n_fiber (integer) total number of available fibers.
+2. RA (array of float) Nominal RA values if the center of the fiber distribution is
 located over the equator.
-3. Dec (float) Nominal Dec if the center of the fiber distribution is
+3. Dec (array of float) Nominal Dec values if the center of the fiber distribution is
 located over the equator.
 3. Fiber size (float).
 4. Patrol radius (float).
@@ -35,9 +36,9 @@ located over the equator.
 The following items might be the output after one fiber allocation pass.
 
 1. n_match (integer). Number of galaxies that were targeted after one pass.
-2. FiberID_match (array of floats). Array of FiberIDs of size n_match
+2. FiberID_match (array of floats). Array of Fiber IDs of size n_match
 listing the fibers targeting a galaxy.
-3. GalaxyID_match (array of floats). Array of GalaxyIDs of size
+3. GalaxyID_match (array of floats). Array of Galaxy IDs of size
 n_match listing the galaxies targeted by a fiber.
 
 
