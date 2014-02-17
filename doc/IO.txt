@@ -9,22 +9,22 @@ The following items might be needed from Galaxy DB.
 4. Nominal type (3 character string). Must be one of the following
 three: LRG, ELG, QSO.
 5. Photometric Information (array of floats).
-6. Number of times that this galaxy can be covered by a tile (integer).
-7. n_targeted. (integer) Number of times that this galaxy has been targeted by a fiber (integer).
-8. Fiber ID (array of floats). Array of size n_targeted indicating which
+6. Number of fields that include this galaxy (integer).
+7. n_targeted. (integer) Number of times that this galaxy has been targeted by a fiber including all the different fields(integer).
+8. Fiber ID (array of ints). Array of size n_targeted indicating which
 fiber targeted the galaxy.
-9. Tile ID (array of floats). Array of size n_targeted indicating in
-which tile was targeted the galaxy.
+9. Field ID (array of floats). Array of size n_targeted indicating in
+which field was targeted the galaxy.
 
-The following items might be needed from Tile DB.
+The following items might be needed from Field DB.
 
-1. Unique Tile ID.
-2. RA (float) tile's central fiber.
-3. Dec (float) tile's central fiber.
+1. Unique FieldID.
+2. RA (float) fields's central fiber.
+3. Dec (float) fields's central fiber.
 
 The following items might be needed from Fiber DB.
 
-1. Unique fiber ID (integer).
+1. Unique FiberID (integer).
 2. RA (float) Nominal RA if the center of the fiber distribution is
 located over the equator.
 3. Dec (float) Nominal Dec if the center of the fiber distribution is
