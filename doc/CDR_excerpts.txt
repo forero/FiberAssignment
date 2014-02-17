@@ -1,0 +1,218 @@
+From the cdr (version retrieved on 17.02.2014)
+
+Section 6.1.4, Page 206:
+
+The actual tiling scheme will balance many factors including the total
+observing time available, observational considerations across the sky,
+and the number of targets of the various kinds obtained by the
+targeting program. The tiling pattern will imprint an angular
+structure on the footprint, defined by regions that are covered by 4
+tiles, by 5 tiles, etc. An example is displayed in Figure 6.2. The
+induced structure could result in artifacts in the correlation
+function and power spectrum. This will be investigated through
+simulations as discussed in Section 6.3.3. 
+
+Section 6.1.4.1 Key Project Target Fiber Assignment, Page 216.
+
+Fiber Assignment is the process of selecting which requested targets
+are assigned to which fibers, and thus also which targets are not
+assigned to any fiber in the regions where there are more targets than
+available fibers. Of course, fiber assignment will depend very much on
+the choice of fiber positioner and on the tiling pattern. 
+
+Fiber assignment and tiling are largely geometrical
+questions. Overlaps between tiles that result from the roughly
+circular shape of the camera and between pixels that result from the
+circular domains of the fibers need to be incorporated into the fiber
+assignment algorithm. In developing the final algorithm, we will begin
+with a simplified structure that reduces the effect of the
+overlaps. Even without overlaps, the fundamental question of choosing
+between target categories is present. Moreover, simplified models will
+allow us to study the artifacts introduced into the data set by the
+limitations on the number of galaxies that can be observed in regions
+where the angular density is great, either because of physical effects
+or simply because of Poisson fluctuations. See Section 6.3.3. It will
+be necessary to understand these artifacts in order to design a fiber
+assignment algorithm where these effects are small and correctable. 
+
+6.1.4.2 Calibration Target Fiber Assignment
+In addition to key project targets (ELGs, LRGs, QSOs), every exposure
+must include stan- dard stars for flux calibration and fibers assigned
+to blank sky to interpolate and subtract the sky from science
+fibers. These calibration targets will be assigned to remaining fibers
+after the key project target fiber assignment has been completed,
+using as many remaining fibers as possible. 
+
+6.1.4.3 Ancillary Program Target Fiber Assignment
+The final and optional step in fiber assignment is for ancillary
+program target requests. These could be assigned to unused fibers, and
+may also override standard star and blank sky fiber assignment within
+the constraints of calibration target uniformity and minimum numbers
+required. Key project targets will be assigned first, then calibration
+targets, and then (optionally) ancillary targets. Performing the fiber
+assignment in these steps allows the survey to pre-plan the key
+project and calibration fiber assignments, while allowing flexibility
+for last minute target-of-opportunity style ancillary requests. This
+also decouples the key project targeting database from external
+program ancillary target requests, allowing both greater
+implementation freedom. 
+
+In exceptional cases, it will be possible for ancillary targets to
+override key project targets, with the necessary bookkeeping of this
+fiber assignment override passed forward to final analyses. We do not
+anticipate this to be a standard mode of operation but structurally
+this will be a collaboration management decision rather than an
+artificial constraint from the design of the fiber assignment and data
+management systems. 
+
+6.1.4.4 Target Assignment Bookkeeping
+The final large-scale structure clustering analyses depend upon a
+detailed knowledge of the efficiency for successfully observing every
+target. As such, it is important to pass forward not only the targets
+which were observed, but also the targets which were not observed. At
+every exposure, the data management system will snapshot all available
+targets for the observed field, whether or not they were assigned a
+fiber, and record the reasons and priorities for why they were
+selected or not. 
+
+
+6.2 Data Processing
+6.2.1 Spectroscopic Data Reduction Pipeline
+
+
+6.2.2 Software Development
+Current development plans for the DESI DRP call for a Python-based
+system, supplemented by calls to C/C++ code as appropriate for
+computationally intensive steps. Python is ideal because of its free
+and open-source nature, its wide and increasing adoption within
+physics and astronomy, the availability of mature and full-featured
+numerical libraries, its support for linking to compiled modules from
+lower-level languages, its ease of maintenance, and its facility for
+combining multiple coding styles (procedural, object-oriented,
+scripting) within a single flexible software system. 
+
+Survey Planning and Fiber Assignment involve algorithms initially
+developed by scien- tists. After the algorithms are mature, they need
+to be integrated into a robust production quality online system. On a
+case-by-case basis we plan to pair scientists with experienced
+programmers to port these algorithms into production quality code. In
+some cases the sci- entists will directly produce the final code, but
+this paired scientist/programmer approach gives the scientists freedom
+of exploration in early development work while ensuring high quality
+final code. Similarly, Target Selection pairs collaboration scientists
+developing the astrophysical selections with computer
+scientists/engineers to apply these algorithms at large scale 
+
+6.2.3.4 Code Management
+All software for DESI data processing will be managed in a version
+control system, currently SVN. All collaborators will have access to
+this repository. Both internal and public data releases will be based
+upon tagged versions of the code, available at the same time as the
+data.
+
+
+6.3 Large Scale Structure Catalog
+
+6.3.1 Angular Selection Function and Angular Systematics
+
+The mangle software and file formats will be modernized and
+generalized to track a larger number of quantities in each region
+(justified below), rather than the single completeness value available
+in mangle. The pattern of fibers on the focal plane must also be
+represented to track unobservable regions of the sky (e.g., where a
+fiber has broken). In BOSS such regions (e.g. behind a bright star or
+higher-priority quasar) are accounted for by removing all targets and
+random galaxies that fall within each mangle veto mask from the large
+scale structure catalog.
+
+To reach the goal of isolating cosmological fluctuations, an
+additional product will be a characterization of the known angular
+systematics in the target map, which could be caused by
+e.g. variations in galactic extinction and/or stellar density,
+observing conditions when the imaging data was taken, or photometric
+calibration variations. This product could, for example, be a set of
+template maps that should be projected out of any clustering analysis,
+or it could be a weighting function that should be applied to galaxies
+to null non-cosmological fluctuations in downstream clustering
+analyses. 
+
+6.3.3 Mitigating DESI’s Non-random Fiber Assignment
+
+DESI’s fiber patrol radius constraints will inevitably make the
+probability that a target is assigned a fiber depend on the local
+density of targets. There is no known exact solution to undo this
+selection, but various methods exist in the literature for correcting
+fiber collision effects in current surveys. A successful scheme for
+BOSS is to simply upweight the nearest galaxy for each target not
+assigned a fiber. The nature of the problem in DESI is different,
+arising not from excluding galaxies that are too close, but from
+excluding galaxies in pixels with too many targets. Galaxies will be
+lost, too, in regions near QSOs used for Ly-α studies because these
+QSOs need multiple observations. The same will be true near LRGs
+needing two observations. It remains to be tested whether the simple
+BOSS upweighting scheme is accurate enough for DESI, or if we will
+need to develop a more sophisticated approach. 
+
+As successively more realistic models of tiling and fiber assignment
+are developed (see Section 6.1.4), these will be tested by running
+full analyses on the catalogs of “observed” galaxies generated by
+implementing the fiber assignment code on mock catalogs. The various
+stages considered will be 
+
+1. Bare bones
+2. Fiber positioner considerations
+3. QSO consideration
+4. Variable number of exposures
+5. With tiling.
+6. Avoid collisions
+
+6.3.4 LSS Products
+The main deliverable product of the LSScat is a flexible framework
+that has a barebones implementation of all the necessary components
+described above; it is the responsibility of the science working
+groups to address the more open-ended research questions such as
+developing fiber assignment corrections, but it is our responsibility
+both to make sure they have easy access all the upstream information
+they may want, and to build a framework whose interface is as simple
+as possible, allowing for rapid development and testing.
+
+
+6.4 Simulations
+
+6.4.1 Cosmological Simulations 
+Cosmological simulations are critical inputs for the development,
+testing and validation of the full DESI pipeline. In particular they
+are essential to 
+
+• understand the effect of the tiling and fiber assignment strategies 
+• model the radial selection function of the different targets for the
+development of the large scale structure catalog 
+• provide a realistically clustered mock input catalog for algorithm
+development 
+• serve as input for the end-to-end simulation pipeline for system
+level testing  
+
+6.4.2 Target Spectral Templates
+
+6.4.3 Operations Simulations
+
+6.4.4 Instrument Simulations
+
+6.4.5 Emission Line Galaxy Simulations
+
+6.4.6 Redshift Success Rates
+
+6.4.7 Trade Studies
+
+6.4.8 DESI End-to-End Survey Simulations
+End-to-end simulations provide a system-level integration test of the
+survey plan and data reduction software, as well as a method to test
+for system-level systematics [166, 187]. Ex- amples of such
+systematics include coupling between tiling, fiber allocation, and
+source clustering; or between targeting color selection, photometric
+calibration, and final source populations. Simulating and testing
+these effects ahead of time enables optimization of the algorithms and
+verification of the science goals given the “as-designed” hardware and
+“as- built” software. End-to-end simulations have also been used by
+other cosmology experiments such as LSST [46] and CMB experiments. 
+
