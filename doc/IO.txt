@@ -1,5 +1,5 @@
 The fiber allocation algorithm takes information from three different
-sources: Galaxy DB, Tile DB, Fiber DB.
+sources: Galaxy DB, Field DB, Fiber DB.
 
 The following items might be needed from Galaxy DB.
 
